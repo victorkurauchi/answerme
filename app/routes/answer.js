@@ -38,14 +38,15 @@ var AnswerRoute = function(router, Answer) {
 
   router.route('/answers/:answer_id')
     .get(function(req, res) {
-      Answer.findById({_id: req.params.answer_id})
+      console.log(req.params);
+      Answer.findById(req.params.answer_id)
         .populate('_question')
         .exec(function(err, answer) {
           if (err) {
             res.send(err);
           }
 
-          console.log('question->', answer._question.description);
+          console.log(answer);
 
           res.json(answer);
         });
