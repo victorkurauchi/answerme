@@ -8,7 +8,8 @@ var AnswerSchema   = new Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   createdBy: String,
-  updatedBy: String
+  updatedBy: String,
+  userLocalStorage: String
 });
 
 module.exports = mongoose.model('Answer', AnswerSchema);

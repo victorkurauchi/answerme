@@ -8,7 +8,8 @@ var QuestionSchema   = new Schema({
   updatedAt: { type: Date, default: Date.now },
   createdBy: String,
   updatedBy: String,
-  answers:  [ { type: Schema.Types.ObjectId, ref: 'Answer' }]
+  answers:  [ { type: Schema.Types.ObjectId, ref: 'Answer' }],
+  userLocalStorage: String
 });
 
 module.exports = mongoose.model('Question', QuestionSchema);

@@ -17,6 +17,7 @@ var QuestionRoute = function(router, Question) {
       var question = new Question();
 
       question.description = req.body.description;
+      question.userLocalStorage = req.body.user_id;
 
       question.save(function(err) {
         if (err)
@@ -34,6 +35,17 @@ var QuestionRoute = function(router, Question) {
         }
 
         res.json(question);
+      });
+    });
+
+  router.route('/questions/user/:user_id')
+    .get(function(req, res) {
+      Question.find({userLocalStorage: req.params.user_id}, function(err, questions) {
+        if (err) {
+          res.send(err);
+        }
+
+        res.json(questions);
       });
     });
 
