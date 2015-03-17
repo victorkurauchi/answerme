@@ -52,24 +52,6 @@ var AnswerRoute = function(router, Answer) {
         });
     });
 
-  router.route('/answers/rate/answer_id')
-    .post(function(req, res) {
-      Answer.findOneAndUpdate({_id: req.body.answer_id}, {rating: req.body.rating}, function(err, answer) {
-        if (err)
-          res.send(err);
-
-        res.json(answer);
-      })
-    })
-    .get(function(req, res) {
-      Answer.findOne({_id: req.params.answer_id}, function(err, answer) {
-        if (err)
-          res.send(err);
-
-        res.json(answer);
-      })
-    })
-
 
 };
 

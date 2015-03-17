@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app        = express();
 var morgan     = require('morgan');
 var cors       = require('cors');
+var fs = require('fs');
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
@@ -21,10 +22,6 @@ var port     = process.env.PORT || 3000; // set our port
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/meresponda'); // connect to our database
 
-var Bear     = require('./app/models/bear');
-var Question = require('./app/models/question');
-var Answer   = require('./app/models/answer');
-
 // ROUTES FOR OUR API
 // =============================================================================
 
@@ -38,9 +35,21 @@ router.use(function(req, res, next) {
 	next();
 });
 
-var routeBear = require('./app/routes/bear')(router, Bear);
-var routeQuestion = require('./app/routes/question')(router, Question);
-var routeAnswer = require ('./app/routes/answer')(router, Answer);
+// dynamically loop through routes folders and require routes passing models
+var modelsPath = './app/models/';
+var routesPath = './app/routes/';
+
+fs.readdir(routesPath,function(err, files) {
+
+  if(err) throw err;
+
+  files.forEach(function(file){
+    var Model = require(modelsPath + file);
+    var route = file.replace('.js', '');
+
+    require(routesPath + route)(router, Model);
+  });
+});
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {

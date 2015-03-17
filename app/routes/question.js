@@ -49,6 +49,45 @@ var QuestionRoute = function(router, Question) {
       });
     });
 
+  router.route('/questions/random')
+    .get(function(req, res) {
+      Question.findRandom().limit(1).exec(function (err, questions) {
+        console.log(questions);
+        if (err) 
+          res.send(err);
+
+        res.json(questions);
+      });
+    });
+
+  router.route('/questions/mostrated')
+    .get(function(req, res) {
+      Question.find().sort({rating: -1}).exec(function (err, questions) {
+        if (err)
+          res.send(err);
+
+        res.json(questions);
+      });
+    });
+
+  router.route('/questions/rate/question_id')
+    .post(function(req, res) {
+      Question.findOneAndUpdate({_id: req.body.question_id}, {rating: req.body.rating}, function(err, question) {
+        if (err)
+          res.send(err);
+
+        res.json(question);
+      })
+    })
+    .get(function(req, res) {
+      Question.findOne({_id: req.params.question_id}, function(err, question) {
+        if (err)
+          res.send(err);
+
+        res.json(question);
+      })
+    });
+
 };
 
 module.exports = QuestionRoute;
