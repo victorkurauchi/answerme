@@ -9,6 +9,7 @@ var AnswerSchema   = new Schema({
   updatedAt: { type: Date, default: Date.now },
   createdBy: String,
   updatedBy: String,
+  random: {type: [Number], default: function(){ return [Math.random(), Math.random()]}, index: '2d'},
   userLocalStorage: String
 });
 

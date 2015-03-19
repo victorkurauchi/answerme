@@ -49,18 +49,23 @@ var QuestionRoute = function(router, Question) {
       });
     });
 
-  router.route('/questions/random')
+  router.route('/randomquestion')
     .get(function(req, res) {
-      Question.findRandom().limit(1).exec(function (err, questions) {
-        console.log(questions);
-        if (err) 
-          res.send(err);
 
-        res.json(questions);
-      });
+      Question
+        .find()
+        .where('random')
+        .near([Math.random(), Math.random()])
+        // .near(0.9537844825536013, 0.8665213629137725 )
+        .exec(function(err, result){
+
+            if (err) res.send(err);
+
+            res.json(result);
+        });
     });
 
-  router.route('/questions/mostrated')
+  router.route('/rated/questions')
     .get(function(req, res) {
       Question.find().sort({rating: -1}).exec(function (err, questions) {
         if (err)

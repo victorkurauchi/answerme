@@ -5,7 +5,8 @@ var AnswerRoute = function(router, Answer) {
       console.log('got it ');
       var answer = new Answer();
       answer.description = req.body.description;
-      answer._question = '54fdf25c96fc29c14b000002';
+      answer._question = req.body.question_id;
+      answer.userLocalStorage = req.body.user_id;
 
       answer.save(function(err) {
         if (err) {

@@ -1,5 +1,5 @@
 {
-  "name": "node-api",
+  "name": "answerme-api",
   "main": "server.js",
   "repository": {
     "type": "git",
@@ -8,14 +8,13 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Chris Sevilleja <scotch.io>",
+  "author": "Victor Kurauchi",
   "license": "MIT",
   "dependencies": {
     "express": "~4.0.0",
     "morgan": "~1.0.0",
     "mongoose": "~3.6.13",
     "body-parser": "~1.0.1",
-    "cors": "~2.5.3",
-    "mongoose-random": "~0.1.1"
+    "cors": "~2.5.3"
   }
 }
