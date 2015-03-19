@@ -56,6 +56,7 @@ var QuestionRoute = function(router, Question) {
         .find()
         .where('random')
         .near([Math.random(), Math.random()])
+        .limit(1)
         // .near(0.9537844825536013, 0.8665213629137725 )
         .exec(function(err, result){
 
