@@ -2,7 +2,6 @@ var AnswerRoute = function(router, Answer) {
 
   router.route('/answers')
     .post(function(req, res) {
-      console.log('got it ');
       var answer = new Answer();
       answer.description = req.body.description;
       answer._question = req.body.question_id;
